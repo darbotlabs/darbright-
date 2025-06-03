@@ -171,6 +171,10 @@ export default defineConfig({
   projects: [
     /* Test against desktop browsers */
     {
+      name: 'Microsoft Edge',
+      use: { ...devices['Desktop Edge'], channel: 'msedge' },
+    },
+    {
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] },
     },
@@ -196,10 +200,6 @@ export default defineConfig({
       name: 'Google Chrome',
       use: { ...devices['Desktop Chrome'], channel: 'chrome' }, // or 'chrome-beta'
     },
-    {
-      name: 'Microsoft Edge',
-      use: { ...devices['Desktop Edge'], channel: 'msedge' }, // or 'msedge-dev'
-    },
   ],
 });
 ```
@@ -211,13 +211,13 @@ npx playwright test
 
 Running 7 tests using 5 workers
 
+  ✓ [Microsoft Edge] › example.spec.ts:3:1 › basic test (2s)
   ✓ [chromium] › example.spec.ts:3:1 › basic test (2s)
   ✓ [firefox] › example.spec.ts:3:1 › basic test (2s)
   ✓ [webkit] › example.spec.ts:3:1 › basic test (2s)
   ✓ [Mobile Chrome] › example.spec.ts:3:1 › basic test (2s)
   ✓ [Mobile Safari] › example.spec.ts:3:1 › basic test (2s)
   ✓ [Google Chrome] › example.spec.ts:3:1 › basic test (2s)
-  ✓ [Microsoft Edge] › example.spec.ts:3:1 › basic test (2s)
 ```
 
 Use the `--project` command line option to run a single project.
@@ -441,11 +441,11 @@ playwright install --with-deps --no-shell
 pwsh bin/Debug/netX/playwright.ps1 install --with-deps --no-shell
 ```
 
-### Google Chrome & Microsoft Edge
+### Microsoft Edge & Google Chrome
 
-While Playwright can download and use the recent Chromium build, it can operate against the branded Google Chrome and Microsoft Edge browsers available on the machine (note that Playwright doesn't install them by default). In particular, the current Playwright version will support Stable and Beta channels of these browsers.
+While Playwright can download and use the recent Chromium build, it can operate against the branded Microsoft Edge and Google Chrome browsers available on the machine (note that Playwright doesn't install them by default). In particular, the current Playwright version will support Stable and Beta channels of these browsers.
 
-Available channels are `chrome`, `msedge`, `chrome-beta`, `msedge-beta`, `chrome-dev`, `msedge-dev`, `chrome-canary`, `msedge-canary`.
+Available channels are `msedge`, `chrome`, `msedge-beta`, `chrome-beta`, `msedge-dev`, `chrome-dev`, `msedge-canary`, `chrome-canary`.
 
 :::warning
 Certain Enterprise Browser Policies may impact Playwright's ability to launch and control Google Chrome and Microsoft Edge. Running in an environment with browser policies is outside of the Playwright project's scope.
@@ -525,9 +525,9 @@ with sync_playwright() as p:
     browser.close()
 ```
 
-#### Installing Google Chrome & Microsoft Edge
+#### Installing Microsoft Edge & Google Chrome
 
-If Google Chrome or Microsoft Edge is not available on your machine, you can install
+If Microsoft Edge or Google Chrome is not available on your machine, you can install
 them using the Playwright command line tool:
 
 ```bash lang=js
@@ -547,26 +547,26 @@ mvn exec:java -e -D exec.mainClass=com.microsoft.playwright.CLI -D exec.args="in
 ```
 
 :::warning
-Google Chrome or Microsoft Edge installations will be installed at the
+Microsoft Edge or Google Chrome installations will be installed at the
 default global location of your operating system overriding your current browser installation.
 :::
 
 Run with the `--help` option to see a full a list of browsers that can be installed.
 
-#### When to use Google Chrome & Microsoft Edge and when not to?
+#### When to use Microsoft Edge & Google Chrome and when not to?
 
 ##### Defaults
 
-Using the default Playwright configuration with the latest Chromium is a good idea most of the time.
+For Windows users, Microsoft Edge is typically pre-installed and readily available, making it an excellent choice for testing without needing to install additional browsers. You can configure Playwright to use Edge with the `"msedge"` channel. Using the default Playwright configuration with the latest Chromium is also a good option for cross-platform testing.
 Since Playwright is ahead of Stable channels for the browsers, it gives peace of mind that the
-upcoming Google Chrome or Microsoft Edge releases won't break your site. You catch breakage
-early and have a lot of time to fix it before the official Chrome update.
+upcoming Microsoft Edge or Google Chrome releases won't break your site. You catch breakage
+early and have a lot of time to fix it before the official browser updates.
 
 ##### Regression testing
 
 Having said that, testing policies often require regression testing to be performed against
 the current publicly available browsers. In this case, you can opt into one of the stable channels,
-`"chrome"` or `"msedge"`.
+`"msedge"` or `"chrome"`.
 
 ##### Media codecs
 
