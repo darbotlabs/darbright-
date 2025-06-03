@@ -51,9 +51,15 @@ export default defineConfig({
   /* Configure projects for major browsers */
   projects: [
     {
-      name: 'chromium',
+      name: 'Microsoft Edge',
+      use: {
+        ...devices['Desktop Edge'],
+        channel: 'msedge',
+      },
+    },
 
-      /* Project-specific settings. */
+    {
+      name: 'chromium',
       use: {
         ...devices['Desktop Chrome'],
       },
@@ -88,12 +94,6 @@ export default defineConfig({
     // },
 
     /* Test against branded browsers. */
-    // {
-    //   name: 'Microsoft Edge',
-    //   use: {
-    //     channel: 'msedge',
-    //   },
-    // },
     // {
     //   name: 'Google Chrome',
     //   use: {
