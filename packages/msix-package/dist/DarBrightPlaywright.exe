@@ -1,0 +1,4 @@
+#!/usr/bin/env node
+console.log("DarBright Playwright MSIX Package");
+console.log("This would launch the VSCode extension installation or configuration tool");
+process.exit(0);

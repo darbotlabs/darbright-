@@ -1,0 +1,12 @@
+{
+  "name": "darbright-playwright-msix",
+  "version": "1.0.0",
+  "description": "MSIX package for DarBright Playwright",
+  "scripts": {
+    "build": "node build.js",
+    "package": "npm run build && makeappx pack /d ./dist /p DarBrightPlaywright.msix",
+    "sign": "signtool sign /a /v /f DarBrightPlaywright.pfx /p password DarBrightPlaywright.msix"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}
