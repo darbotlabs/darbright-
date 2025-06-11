@@ -1,0 +1,131 @@
+{
+  "name": "darbright-playwright",
+  "displayName": "DarBright Playwright",
+  "description": "DarBright Playwright Test Extension with MCP and Power Platform support",
+  "version": "1.0.0",
+  "engines": {
+    "vscode": "^1.74.0"
+  },
+  "categories": [
+    "Testing",
+    "Other"
+  ],
+  "keywords": [
+    "playwright",
+    "testing",
+    "e2e",
+    "automation",
+    "mcp",
+    "power-platform"
+  ],
+  "activationEvents": [
+    "onLanguage:javascript",
+    "onLanguage:typescript",
+    "workspaceContains:**/playwright.config.*",
+    "workspaceContains:**/*.spec.*",
+    "workspaceContains:**/*.test.*"
+  ],
+  "main": "./lib/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "darbright-playwright.showCommands",
+        "title": "Show All Commands",
+        "category": "DarBright Playwright"
+      },
+      {
+        "command": "darbright-playwright.installPlaywright",
+        "title": "Install Playwright",
+        "category": "DarBright Playwright"
+      },
+      {
+        "command": "darbright-playwright.recordTest",
+        "title": "Record New Test",
+        "category": "DarBright Playwright"
+      },
+      {
+        "command": "darbright-playwright.runTests",
+        "title": "Run Tests",
+        "category": "DarBright Playwright"
+      },
+      {
+        "command": "darbright-playwright.openTraceViewer",
+        "title": "Open Trace Viewer",
+        "category": "DarBright Playwright"
+      },
+      {
+        "command": "darbright-playwright.startMCPServer",
+        "title": "Start MCP Server",
+        "category": "DarBright Playwright"
+      }
+    ],
+    "configuration": {
+      "title": "DarBright Playwright",
+      "properties": {
+        "darbright-playwright.playwrightPath": {
+          "type": "string",
+          "description": "Path to Playwright installation"
+        },
+        "darbright-playwright.mcpEnabled": {
+          "type": "boolean",
+          "default": false,
+          "description": "Enable MCP (Model Context Protocol) server"
+        },
+        "darbright-playwright.mcpPort": {
+          "type": "number",
+          "default": 8080,
+          "description": "Port for MCP server"
+        },
+        "darbright-playwright.powerPlatformEnabled": {
+          "type": "boolean",
+          "default": false,
+          "description": "Enable Power Platform integration"
+        }
+      }
+    },
+    "views": {
+      "explorer": [
+        {
+          "id": "darbrightPlaywrightTests",
+          "name": "DarBright Tests",
+          "when": "resourceExtname == .spec.js || resourceExtname == .spec.ts || resourceExtname == .test.js || resourceExtname == .test.ts"
+        }
+      ]
+    },
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "darbrightPlaywright",
+          "title": "DarBright Playwright",
+          "icon": "$(play)"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run build",
+    "build": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "package": "vsce package",
+    "test": "node ./lib/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.74.0",
+    "@types/node": "^18.19.68",
+    "typescript": "^5.8.2",
+    "vsce": "^2.15.0"
+  },
+  "dependencies": {
+    "ws": "^8.17.1"
+  },
+  "publisher": "darbotlabs",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/darbotlabs/darbright-"
+  },
+  "files": [
+    "lib/**/*",
+    "package.json",
+    "LICENSE"
+  ]
+}
