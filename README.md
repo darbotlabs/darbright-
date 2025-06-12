@@ -160,6 +160,49 @@ test('Intercept network requests', async ({ page }) => {
 });
 ```
 
+#### Automated Edge browser screenshot capture
+
+This example shows how to launch Microsoft Edge with remote debugging and capture screenshots using Playwright's CDP connection:
+
+```PowerShell
+# Launch Edge with remote debugging enabled
+Start-Process msedge -ArgumentList "--remote-debugging-port=9222", "--new-window", "https://copilotstudio.microsoft.com"
+Start-Sleep -Seconds 5
+
+# Use Playwright to connect and capture screenshot
+node -e "
+const { chromium } = require('./packages/playwright-core');
+(async () => {
+  const browser = await chromium.connectOverCDP('http://localhost:9222');
+  const contexts = browser.contexts();
+  if (contexts.length > 0) {
+    const pages = contexts[0].pages();
+    if (pages.length > 0) {
+      const targetPage = pages.find(p => p.url().includes('copilotstudio')) || pages[0];
+      await targetPage.waitForLoadState('networkidle');
+      await targetPage.screenshot({ path: 'edge-screenshot.png', fullPage: true });
+      console.log('Screenshot saved!');
+    }
+  }
+  await browser.close();
+})();
+"
+```
+
+## Custom Tools
+
+### Copilot Studio Analyzer
+
+Located in the `copilot-studio-analyzer` folder, this tool automatically analyzes Microsoft Copilot Studio UI and generates detailed reports. It captures screenshots and performs comprehensive UI analysis.
+
+To use the tool:
+```
+cd copilot-studio-analyzer
+node analyze.js
+```
+
+Or simply run `run-analyzer.bat` on Windows.
+
 ## Resources
 
 * [Documentation](https://playwright.dev)

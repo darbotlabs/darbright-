@@ -1,0 +1,38 @@
+{
+  "name": "copilot-studio-analyzer",
+  "version": "1.0.0",
+  "description": "A tool for analyzing Microsoft Copilot Studio UI and generating detailed reports - Dataverse Hero Quest Edition",
+  "main": "analyze.js",
+  "scripts": {
+    "analyze": "node analyze.js",
+    "test": "npx playwright test",
+    "test:headed": "npx playwright test --headed",
+    "test:debug": "npx playwright test --debug",
+    "show-report": "npx playwright show-report",
+    "quest:level1": "npx playwright test mcp-level1-login.spec.ts",
+    "quest:level2": "npx playwright test mcp-level2-knowledge.spec.ts",
+    "quest:level3": "npx playwright test mcp-level3-publisher.spec.ts",
+    "quest:level4": "npx playwright test mcp-level4-flow.spec.ts",
+    "quest:level5": "npx playwright test mcp-level5-e2e.spec.ts",
+    "quest:all": "npx playwright test mcp-level*.spec.ts"
+  },
+  "keywords": [
+    "copilot",
+    "studio",
+    "analysis",
+    "playwright",
+    "automation",
+    "dataverse",
+    "quest",
+    "hero"
+  ],
+  "author": "Darbot",
+  "license": "MIT",
+  "dependencies": {
+    "playwright-core": "^1.41.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.41.0",
+    "@types/node": "^20.0.0"
+  }
+}
